@@ -68,9 +68,6 @@ public abstract class DialogPreference extends Preference implements
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.DialogPreference, defStyle, 0);
 		mDialogTitle = a.getString(R.styleable.DialogPreference_dialogTitle);
-		if (mDialogTitle == null) {
-			mDialogTitle = getTitle();
-		}
 		mDialogMessage = a
 				.getString(R.styleable.DialogPreference_dialogMessage);
 		mDialogIcon = a.getDrawable(R.styleable.DialogPreference_dialogIcon);
@@ -253,6 +250,9 @@ public abstract class DialogPreference extends Preference implements
 	}
 
 	protected void showDialog(Bundle state) {
+		if (mDialogTitle == null) {
+			mDialogTitle = getTitle();
+		}
 		Context context = getContext();
 		mWhichButtonClicked = DialogInterface.BUTTON_NEGATIVE;
 		mBuilder = new AlertDialog.Builder(context);
